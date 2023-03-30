@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password_hash String
+  name          String
+  isAdmin       Boolean  @default(false)
+  avatar        String?
+  created_at    DateTime @default(now())
+
+  rentals    Rental[]
+  UserTokens UserToken[]
+  Rating     Rating[]
+
+  @@map("users")
+}
+
+model Property {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  city        String
+  region      String
+  daily_price Int
+  rooms       Int
+  bathrooms   Int
+  size        Int
+  capacity    Int
+  created_at  DateTime @default(now())
+
+  images  PropertyImage[]
+  options Option[]
+  rentals Rental[]
+  ratings  Rating[]
+
+  @@map("properties")
+}
+
+model PropertyImage {
+  id String @id @default(uuid())
+
+  filename   String
+  created_at DateTime @default(now())
+
+  // image File @relation(fields: [image_id], references: [id])
+  // image_id     String
+
+  property_id String
+  properties  Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("property_images")
+}
+
+model Option {
+  id   String @id @default(uuid())
+  name String
+
+  filename   String
+  created_at DateTime @default(now())
+
+  properties Property[]
+
+  @@map("options")
+}
+
+model Rental {
+  id       String   @id @default(uuid())
+  check_in DateTime
+  checkout DateTime
+  status   String
+
+  total             Int
+  payment_intent_id String
+  card_brand        String
+  card_last4        String
+
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+  property_id String
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  created_at DateTime @default(now())
+
+  @@map("rentals")
+}
+
+// model File {
+//   id String @id @unique @default(uuid())
+
+//   file_url String
+//   file_key String
+
+//   created_at    DateTime        @default(now())
+//   updated_at    DateTime        @default(now())
+
+//   propertyImage PropertyImage[]
+
+//   @@map("files")
+// }
+
+model UserToken {
+  id String @id @default(uuid())
+
+  token String @default(uuid())
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users_tokens")
+}
+
+model Rating {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  value       Int
+
+  property_id String
+  properties  Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+  user_id     String
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("ratings")
+}
