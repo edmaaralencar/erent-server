@@ -2,14 +2,16 @@ import { Router } from 'express'
 import multer from 'multer'
 
 import { multerConfig } from '@/config/multer'
-
+import ensureAdmin from '@/http/middlewares/ensureAdmin'
 import { ensureAuthenticated } from '@/http/middlewares/ensureAuthenticated'
+
 import { authenticate } from './authenticate'
 import { getUserProfile } from './get-user-profile'
 import { register } from './register'
 import { updateUserAvatar } from './update-user-avatar'
 import { sendForgotPassword } from './send-forgot-password'
 import { resetPassword } from './reset-password'
+import { listAllUsers } from './list-all'
 
 export const usersRoutes = Router()
 
@@ -23,6 +25,7 @@ usersRoutes.post('/forgot-password', sendForgotPassword)
 usersRoutes.post('/reset-password', resetPassword)
 usersRoutes.post('/sessions', authenticate)
 usersRoutes.get('/me', ensureAuthenticated, getUserProfile)
+usersRoutes.get('/', ensureAuthenticated, ensureAdmin, listAllUsers)
 usersRoutes.put(
   '/avatar',
   ensureAuthenticated,
