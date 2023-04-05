@@ -240,6 +240,8 @@ describe('Create Rental Use Case', () => {
   })
 
   it('should not be able to rent when the check in date is after the checkout date', async () => {
+    vi.setSystemTime(new Date(2023, 2, 21))
+
     const property = await propertiesRepository.create({
       name: 'Casa na praia',
       description:

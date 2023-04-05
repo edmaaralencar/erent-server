@@ -7,7 +7,7 @@ export interface UserUpdateData {
 
 export type UserWithRentals = Prisma.UserGetPayload<{
   include: {
-    rentals: true
+    rentals?: true
   }
 }>
 

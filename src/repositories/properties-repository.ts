@@ -43,8 +43,8 @@ export interface PropertiesRepository {
   findManyByFilter(
     data: FindManyByFilterParams,
   ): Promise<PropertyWithImagesAndOptions[]>
+  create(data: PropertyCreateInput): Promise<Property>
   delete(id: string): Promise<void>
   count(): Promise<number>
   countWithFilters(data: CountWithFiltersParams): Promise<number | undefined>
-  create(data: PropertyCreateInput): Promise<Property>
 }

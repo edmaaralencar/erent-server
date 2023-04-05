@@ -51,6 +51,7 @@ export class CreateRentalUseCase {
     const checkoutDate = dayjs(checkout)
 
     if (checkInDate.isBefore(new Date()) || checkoutDate.isBefore(new Date())) {
+      console.log('erro')
       throw new RentalIsInPastError()
     }
 

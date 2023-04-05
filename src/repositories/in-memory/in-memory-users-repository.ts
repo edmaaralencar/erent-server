@@ -1,9 +1,17 @@
-import { User, Prisma } from '@prisma/client'
+import { User, Prisma, Rental } from '@prisma/client'
 import { randomUUID } from 'crypto'
-import { UsersRepository } from '../users-repository'
+import { UsersRepository, UserWithRentals } from '../users-repository'
 
 export class InMemoryUsersRepository implements UsersRepository {
-  public items: User[] = []
+  public items: User[] | UserWithRentals[] = []
+
+  async findMany(page: number): Promise<(User & { rentals?: Rental[] })[]> {
+    return this.items.slice((page - 1) * 9, page * 9)
+  }
+
+  async count(): Promise<number> {
+    return this.items.length
+  }
 
   async findByEmail(email: string) {
     const user = this.items.find((item) => item.email === email)

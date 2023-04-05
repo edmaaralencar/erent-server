@@ -10,6 +10,17 @@ import {
 export class InMemoryRentalsRepository implements RentalsRepository {
   public items: Rental[] = []
 
+  async findManyByPropertyIdAndUserId(
+    propertyId: string,
+    userId: string,
+  ): Promise<Rental[]> {
+    const properties = this.items.filter(
+      (item) => item.property_id === propertyId && item.user_id === userId,
+    )
+
+    return properties
+  }
+
   async findMany(page: number) {
     return this.items.slice(
       (page - 1) * 9,
