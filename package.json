@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsup src --out-dir build",
-    "buildtest": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "start": "node dist/server.js",
     "test": "vitest run",
     "test:watch": "vitest"
