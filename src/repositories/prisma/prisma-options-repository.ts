@@ -20,13 +20,11 @@ export class PrismaOptionsRepository implements OptionsRepository {
   }
 
   async delete(id: string) {
-    const option = await prisma.option.delete({
+    await prisma.option.delete({
       where: {
         id,
       },
     })
-
-    return option
   }
 
   async create(data: Prisma.OptionCreateInput) {

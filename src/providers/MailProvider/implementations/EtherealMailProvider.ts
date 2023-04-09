@@ -9,13 +9,13 @@ export class EtherealMailProvider implements IMailProvider {
   constructor() {
     nodemailer
       .createTestAccount()
-      .then(() => {
+      .then((account) => {
         const transporter = nodemailer.createTransport({
           host: 'smtp.ethereal.email',
           port: 587,
           auth: {
-            user: 'ruthie.wisozk@ethereal.email',
-            pass: 'ZNx99mur4JZytkzrvW',
+            user: account.user,
+            pass: account.pass,
           },
         })
 

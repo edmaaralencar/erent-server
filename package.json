@@ -6,11 +6,16 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js",
+    "buildtest": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "start": "node dist/server.js",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "devDependencies": {
+    "@babel/cli": "7.21.0",
+    "@babel/core": "7.21.4",
+    "@babel/preset-env": "7.21.4",
+    "@babel/preset-typescript": "7.21.4",
     "@edmaralencar/eslint-config": "1.0.5",
     "@types/bcryptjs": "2.4.2",
     "@types/cors": "2.8.13",
@@ -19,6 +24,7 @@
     "@types/multer": "1.4.7",
     "@types/node": "18.15.3",
     "@types/nodemailer": "6.4.7",
+    "babel-plugin-module-resolver": "5.0.0",
     "prisma": "4.11.0",
     "tsup": "6.6.3",
     "tsx": "3.12.5",

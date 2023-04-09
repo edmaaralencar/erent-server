@@ -1,4 +1,4 @@
-import { makeListAllOptionsUseCase } from '@/use-cases/options/factories/make-list-all-options-use-case copy'
+import { makeListAllOptionsUseCase } from '@/use-cases/options/factories/make-list-all-options-use-case'
 import { Request, Response } from 'express'
 import { OptionsMapper } from './mapper/OptionsMapper'
 
