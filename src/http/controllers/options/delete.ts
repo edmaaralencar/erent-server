@@ -7,7 +7,7 @@ export async function deleteOption(request: Request, response: Response) {
     id: z.string(),
   })
 
-  const { id } = deleteOptionSchema.parse(request.body)
+  const { id } = deleteOptionSchema.parse(request.params)
 
   const deleteOptionUsecase = makeDeleteOptionUseCase()
 
