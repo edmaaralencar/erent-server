@@ -19,7 +19,7 @@ export class UsersMapper {
       name: data.name,
       email: data.email,
       role: data.isAdmin ? 'Admin' : 'Usuário',
-      rentals: data.rentals.length,
+      rentals: data.rentals ? data.rentals.length : 0,
       avatar: data.avatar ? formatImageUrl(data.avatar, 'users') : null,
     }
   }
