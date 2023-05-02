@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "vercel-buid": "npx prisma migrate deploy",
-    
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -33,6 +32,7 @@
   },
   "dependencies": {
     "@prisma/client": "4.11.0",
+    "aws-sdk": "2.1369.0",
     "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "dayjs": "1.11.7",
