@@ -8,11 +8,13 @@
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "vercel-buid": "npx prisma migrate deploy",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "start": "node dist/server.js",
     "test": "vitest run",
     "test:watch": "vitest"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",
@@ -29,6 +31,7 @@
     "@types/nodemailer": "6.4.7",
     "babel-plugin-module-resolver": "5.0.0",
     "prisma": "4.11.0",
+    "ts-node": "10.9.1",
     "tsup": "6.6.3",
     "tsx": "3.12.5",
     "typescript": "5.0.2",
