@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "vercel-buid": "npx prisma migrate deploy",
     "test": "vitest run",
     "test:watch": "vitest"
   },
