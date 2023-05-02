@@ -1,7 +1,7 @@
 import { IStorageProvider } from '../IStorageProvider'
 import fs from 'fs'
 import path from 'path'
-import { multerConfig } from '@/config/multer'
+import { multerConfig } from '../../../config/multer'
 
 export class DiskStorageProvider implements IStorageProvider {
   async save(filename: string, folder: string): Promise<void> {
