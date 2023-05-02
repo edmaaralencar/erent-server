@@ -16,7 +16,7 @@ export class S3StorageProvider implements IStorageProvider {
     })
   }
 
-  async save(filename: string): Promise<void> {
+  async save(filename: string, _: string): Promise<void> {
     const originalPath = path.resolve(multerConfig.directory, filename)
 
     const ContentType = mime.getType(originalPath)
@@ -29,7 +29,7 @@ export class S3StorageProvider implements IStorageProvider {
 
     this.client
       .putObject({
-        Bucket: 'aula-youtube-ed-1',
+        Bucket: 'erent-client-images',
         Key: filename,
         ACL: 'public-read',
         Body: fileContent,
@@ -40,10 +40,10 @@ export class S3StorageProvider implements IStorageProvider {
     fs.promises.unlink(originalPath)
   }
 
-  async delete(filename: string): Promise<void> {
+  async delete(filename: string, _: string): Promise<void> {
     this.client
       .deleteObject({
-        Bucket: 'aula-youtube-ed-1',
+        Bucket: 'erent-client-images',
         Key: filename,
       })
       .promise()
