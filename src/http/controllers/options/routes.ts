@@ -7,6 +7,7 @@ import ensureAdmin from '@/http/middlewares/ensureAdmin'
 
 import { create } from './create'
 import { listAll } from './list-all'
+import { deleteOption } from './delete'
 
 export const optionsRoutes = Router()
 
@@ -22,4 +23,5 @@ optionsRoutes.post(
   upload.single('image'),
   create,
 )
+optionsRoutes.delete('/:id', ensureAuthenticated, ensureAdmin, deleteOption)
 optionsRoutes.get('/', listAll)
